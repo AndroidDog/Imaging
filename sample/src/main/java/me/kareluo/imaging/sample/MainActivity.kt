@@ -1,6 +1,9 @@
 package me.kareluo.imaging.sample
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,6 +28,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(
                     this, GallerySampleActivity::class.java
             ))
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                        && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
         }
     }
 }
